@@ -81,20 +81,22 @@ moonwake-git-practice/
 请在确认命令能够在目标 Ubuntu 环境中重复执行后，补充以下信息：
 
 ```text
-编译器及版本：
-OpenCV 版本：
-构建命令：
-生成的可执行文件：
+编译器及版本：g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+OpenCV 版本：4.5.4
+构建命令：g++ -std=c++17 src/buoy_offset.cpp -o buoy_offset $(pkg-config --cflags --libs opencv4)
+生成的可执行文件：buoy_offset
 ```
 
 ```bash
-# 在此填写经过验证的构建命令
+g++ -std=c++17 src/buoy_offset.cpp -o buoy_offset $(pkg-config --cflags --libs opencv4)
+
 ```
 
 ## 运行
 
 ```bash
-# 在此填写程序运行命令，并至少保留一个可重复的样例输入
+./buoy_offset samples/buoy_left.jpg
+
 ```
 
 ## 检查
@@ -102,12 +104,15 @@ OpenCV 版本：
 `tests/check_detection.py` 检查图像读取和红色目标检测；`tests/check_solution.py` 检查目标中心、水平偏移和相对位置计算。请在下方记录经过验证的检查命令与实际结果。
 
 ```bash
-# 在此填写检查命令
+python3 tests/check_detection.py ./buoy_offset
+python3 tests/check_solution.py ./buoy_offset
+
 ```
 
 ```text
-测试环境：
-实际结果：
+测试环境： Ubuntu 22.04 (VMware 虚拟机)，g++ 11.4.0，OpenCV 4.5.4
+实际结果：Provided image loading and buoy detection: 10 samples passed
+          Geometry and position logic: 10 samples passed
 ```
 
 ## 样本与适用范围

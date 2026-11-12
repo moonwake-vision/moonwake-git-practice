@@ -38,23 +38,25 @@ bool DetectRedBuoy(const cv::Mat& image, cv::Rect& buoy_box) {
 
 // TODO: 计算浮漂外接框的水平中心坐标。
 int BuoyCenterX(int buoy_x, int buoy_width) {
-    (void)buoy_x;
-    (void)buoy_width;
-    return 0;  // 请替换这一行
+    return buoy_x + buoy_width / 2;
+
 }
 
 // TODO: 计算相对图像中心的水平像素偏移，右侧为正。
 int HorizontalOffsetPx(int buoy_center_x, int image_width) {
     (void)buoy_center_x;
     (void)image_width;
-    return 0;  // 请替换这一行
+    return buoy_center_x - image_width / 2;// 请替换这一行
 }
 
 // TODO: 返回 LEFT、CENTER 或 RIGHT，绝对偏移不超过 tolerance_px 时返回 CENTER。
 const char* RelativePosition(int offset_px, int tolerance_px) {
     (void)offset_px;
     (void)tolerance_px;
-    return "CENTER";  // 请替换这一行
+     if (offset_px >= -tolerance_px && offset_px <= tolerance_px) {
+    return "CENTER";
+  }
+     return offset_px < 0 ? "LEFT" : "RIGHT"; // 请替换这一行
 }
 
 int main(int argc, char* argv[]) {
